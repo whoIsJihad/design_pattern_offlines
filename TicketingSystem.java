@@ -134,6 +134,9 @@ class BasicBuilder implements Builder{
 		}
 		scanner.close();
 	}
+    public TicketingSystem getFinalProduct(){
+        return this.ticketingSystem;
+    }
 
 }
 class StandardBuilder implements Builder {
@@ -202,6 +205,9 @@ class StandardBuilder implements Builder {
         }
         scanner.close();
     }
+    public TicketingSystem getFinalProduct(){
+        return this.ticketingSystem;
+    }
 }
 
 class AdvancedBuilder implements Builder {
@@ -269,6 +275,9 @@ class AdvancedBuilder implements Builder {
         }
         scanner.close();
     }
+    public TicketingSystem getFinalProduct(){
+        return this.ticketingSystem;
+    }
 }
 
 class PremiumBuilder implements Builder {
@@ -335,6 +344,25 @@ class PremiumBuilder implements Builder {
         }
         scanner.close();
     }
+    public TicketingSystem getFinalProduct(){
+        return this.ticketingSystem;
+    }
 }
 
+class Director{
+    Builder builder;
+
+    public Director(Builder builder){
+        this.builder=builder;
+    }
+    public void build(){
+        builder.buildDisplayUnit();
+        builder.buildIdentification();
+        builder.buildPaymentTerminal();
+        builder.buildInternetConnection();
+        builder.buildStorage();
+        builder.buildController();
+        builder.buildWebServer();
+    }
+}
 
