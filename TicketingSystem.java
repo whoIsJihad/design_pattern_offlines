@@ -51,8 +51,15 @@ public class TicketingSystem {
 	}
 }
 class DisplayUnit{
-	String microController;
-	String display;
+    public String microController;
+    public String display;
+    public void setMicroController(String microController) {
+        this.microController = microController;
+    }
+
+    public void setDisplay(String display) {
+        this.display = display;
+    }
 }
 
 interface Builder{
@@ -74,8 +81,8 @@ class BasicBuilder implements Builder{
 	@Override
 	public void buildDisplayUnit(){
 		DisplayUnit displayUnit=new DisplayUnit();
-		displayUnit.microController="ATMega32";
-		displayUnit.display="LCD";
+		displayUnit.setMicroController("ATMega32");
+        displayUnit.setDisplay("LCD");
 		this.ticketingSystem.setDisplayUnit(displayUnit);
 	} 
 	@Override
@@ -85,11 +92,12 @@ class BasicBuilder implements Builder{
 	}
 
 	public void buildPaymentTerminal(){
-		this.ticketingSystem.setPaymentTerminal("On spot payment");
+		this.ticketingSystem.setPaymentTerminal("Payment terminal has been set up for ticketing system(basic)");
 	}
 
 	public void buildInternetConnection(){
 		Scanner scanner=new Scanner(System.in);
+        System.out.println("Choose your internet connection: ");
 		System.out.println("a.GSM \n b.WIFI\n");
 		String internetConnection=scanner.next();
 		if(internetConnection=="GSM"){
@@ -109,11 +117,12 @@ class BasicBuilder implements Builder{
 		this.ticketingSystem.setStorage("SD card");
 	}
 	public void buildController(){
-		this.ticketingSystem.setController("Separate Controller Unit");
+		this.ticketingSystem.setController("Separate Controller Unit has been set up");
 	}
 	public void buildWebServer(){
 
 		Scanner scanner=new Scanner(System.in);
+        System.out.println("Choose your web server framework : ");
 		System.out.println("a.Django \n b.NodeJS \n c.Ruby\n");
 		String framework=scanner.next();
 		if(framework=="Django"||framework=="NodeJS"||framework=="Ruby"){
@@ -137,8 +146,8 @@ class StandardBuilder implements Builder {
     @Override
     public void buildDisplayUnit() {
         DisplayUnit displayUnit = new DisplayUnit();
-        displayUnit.microController = "Arduino Mega";
-        displayUnit.display = "LED";
+        displayUnit.setMicroController("Arduino Mega");
+        displayUnit.setDisplay("LED");
         this.ticketingSystem.setDisplayUnit(displayUnit);
     }
 
@@ -149,7 +158,8 @@ class StandardBuilder implements Builder {
 
     @Override
     public void buildPaymentTerminal() {
-        this.ticketingSystem.setPaymentTerminal("On spot payment");
+        this.ticketingSystem.setPaymentTerminal("Payment terminal has been set up for ticketing system(standard)");
+
     }
 
     @Override
@@ -175,7 +185,8 @@ class StandardBuilder implements Builder {
 
     @Override
     public void buildController() {
-        this.ticketingSystem.setController("Arduino Controller");
+        this.ticketingSystem.setController("Separate Controller Unit has been set up");
+
     }
 
     @Override
@@ -203,19 +214,20 @@ class AdvancedBuilder implements Builder {
     @Override
     public void buildDisplayUnit() {
         DisplayUnit displayUnit = new DisplayUnit();
-        displayUnit.microController = "Raspberry Pi";
-        displayUnit.display = "OLED";
+        displayUnit.setMicroController("Raspberry Pi");
+        displayUnit.setDisplay("OLED");
         this.ticketingSystem.setDisplayUnit(displayUnit);
     }
 
     @Override
     public void buildIdentification() {
-        this.ticketingSystem.setIdentification("Fingerprint scanner");
+        this.ticketingSystem.setIdentification("NFC Cards");
     }
 
     @Override
     public void buildPaymentTerminal() {
-        this.ticketingSystem.setPaymentTerminal("Card payment terminal");
+        this.ticketingSystem.setPaymentTerminal("Payment terminal has been set up for ticketing system(advanced)");
+
     }
 
     @Override
@@ -236,12 +248,12 @@ class AdvancedBuilder implements Builder {
 
     @Override
     public void buildStorage() {
-        this.ticketingSystem.setStorage("64GB SSD");
+        this.ticketingSystem.setStorage("Built in storage is already provided with Rasberry PI");
     }
 
     @Override
     public void buildController() {
-        this.ticketingSystem.setController("Integrated Raspberry Pi");
+        this.ticketingSystem.setController("Separate Controller Unit has been set up");
     }
 
     @Override
@@ -269,19 +281,19 @@ class PremiumBuilder implements Builder {
     @Override
     public void buildDisplayUnit() {
         DisplayUnit displayUnit = new DisplayUnit();
-        displayUnit.microController = "Raspberry Pi";
-        displayUnit.display = "Touch screen";
+        displayUnit.setMicroController("Rasberry PI");
+        displayUnit.setDisplay("Touch screen");
         this.ticketingSystem.setDisplayUnit(displayUnit);
     }
 
     @Override
     public void buildIdentification() {
-        this.ticketingSystem.setIdentification("Facial recognition");
+        this.ticketingSystem.setIdentification("NFC cards");
     }
 
     @Override
     public void buildPaymentTerminal() {
-        this.ticketingSystem.setPaymentTerminal("Mobile payment integration");
+        this.ticketingSystem.setPaymentTerminal("Payment terminal has been set up for ticketing system(premium)");
     }
 
     @Override
@@ -302,12 +314,12 @@ class PremiumBuilder implements Builder {
 
     @Override
     public void buildStorage() {
-        this.ticketingSystem.setStorage("128GB SSD");
+        this.ticketingSystem.setStorage("Built in storage is already provided with Rasberry PI");
     }
 
     @Override
     public void buildController() {
-        this.ticketingSystem.setController("Integrated Raspberry Pi with advanced controller unit");
+        this.ticketingSystem.setController("Touch screen is already setup as a controller");
     }
 
     @Override
