@@ -1,5 +1,5 @@
 public class Connection_Server {
-    //empty class
+    // empty class
 }
 
 interface InternetConnection {
@@ -27,6 +27,7 @@ class DjangoWebServer implements WebServer {
         System.out.println("Django web server has been configured into the system");
     }
 }
+
 class NodeJSWebServer implements WebServer {
     public void configure() {
         System.out.println("NodeJS web server has been configured into the system");
@@ -38,44 +39,28 @@ class RubyWebServer implements WebServer {
         System.out.println("Ruby web server has been configured into the system");
     }
 }
-//interface for factory
-interface InternetConnectionFactory{
-    InternetConnection createConnection();
-}
-interface WebServerFactory{
-    WebServer createWebServer();
-}
 
-class WiFiConnectionFactory implements InternetConnectionFactory {
-    public InternetConnection createConnection() {
-        return new WiFiConnection();
+// interface for factory
+class InternetConnectionFactory {
+
+    InternetConnection createConnection(String connectionType) {
+        if (connectionType.equalsIgnoreCase("WiFi")) {
+            return new WiFiConnection();
+        } else if (connectionType.equalsIgnoreCase("GSM")) {
+            return new GSMConnection();
+        } else
+            return null;
     }
 }
 
-class GSMConnectionFactory implements InternetConnectionFactory {
-    public InternetConnection createConnection() {
-        return new GSMConnection();
+class WebServerFactory {
+    WebServer createWebServer(String serverType) {
+        if (serverType.equalsIgnoreCase("Ruby"))
+            return new RubyWebServer();
+        else if (serverType.equalsIgnoreCase("NodeJS"))
+            return new NodeJSWebServer();
+        else if (serverType.equalsIgnoreCase("Django"))
+            return new DjangoWebServer();
+        return null;
     }
 }
-
-class DjangoWebServerFactory implements WebServerFactory{
-    public WebServer createWebServer(){
-        return new DjangoWebServer();
-    }
-}
-
-class RubyWebServerFactory implements WebServerFactory{
-    public WebServer createWebServer(){
-        return new RubyWebServer();
-    }
-}
-class NodeJSWebServerFactory implements WebServerFactory{
-    public WebServer createWebServer(){
-        return new NodeJSWebServer();
-    }
-}
-
-
-
-
-

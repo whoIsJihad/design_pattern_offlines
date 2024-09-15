@@ -75,13 +75,13 @@ interface Builder {
 
     void buildPaymentTerminal();
 
-    void buildInternetConnection();
+    void buildInternetConnection(String connectionType);
 
     void buildController();
 
     void buildStorage();
 
-    void buildWebServer();
+    void buildWebServer(String serverType);
 
 }
 
@@ -110,20 +110,9 @@ class BasicBuilder implements Builder {
         this.ticketingSystem.setPaymentTerminal("Payment terminal has been set up for ticketing system(basic)");
     }
 
-    public void buildInternetConnection() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose your internet connection: ");
-        System.out.println("a.GSM \n b.WIFI\n");
-        String internetConnection = scanner.next();
-        if (internetConnection == "GSM") {
-            this.ticketingSystem.setInternetConnection(new GSMConnectionFactory().createConnection());
-        } else if (internetConnection == "WIFI") {
-            this.ticketingSystem.setInternetConnection(new WiFiConnectionFactory().createConnection());
-        } else {
-            System.out.println("Invalid");
-            this.ticketingSystem.setInternetConnection(null);
-        }
-        scanner.close();
+    public void buildInternetConnection(String connectionType) {
+        InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
+        this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
     }
 
     public void buildStorage() {
@@ -134,23 +123,9 @@ class BasicBuilder implements Builder {
         this.ticketingSystem.setController("Separate Controller Unit has been set up");
     }
 
-    public void buildWebServer() {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose your web server framework : ");
-        System.out.println("a.Django \n b.NodeJS \n c.Ruby\n");
-        String framework = scanner.next();
-        if (framework.equalsIgnoreCase("Django")) {
-            this.ticketingSystem.setWebServer(new DjangoWebServerFactory().createWebServer());
-        } else if (framework.equalsIgnoreCase("NodeJS")) {
-            this.ticketingSystem.setWebServer(new NodeJSWebServerFactory().createWebServer());
-        } else if (framework.equalsIgnoreCase("Ruby")) {
-            this.ticketingSystem.setWebServer(new NodeJSWebServerFactory().createWebServer());
-        } else {
-            System.err.println("Invalid");
-            this.ticketingSystem.setWebServer(null);
-        }
-        scanner.close();
+    public void buildWebServer(String serverType) {
+        WebServerFactory webServerFactory=new WebServerFactory();
+        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));;
     }
 
     public TicketingSystem getFinalProduct() {
@@ -186,19 +161,10 @@ class StandardBuilder implements Builder {
     }
 
     @Override
-    public void buildInternetConnection() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("a.GSM \n b.WIFI\n");
-        String internetConnection = scanner.next();
-        if (internetConnection.equalsIgnoreCase("GSM")) {
-            this.ticketingSystem.setInternetConnection(new GSMConnectionFactory().createConnection());
-        } else if (internetConnection.equalsIgnoreCase("WIFI")) {
-            this.ticketingSystem.setInternetConnection(new WiFiConnectionFactory().createConnection());
-        } else {
-            System.out.println("Invalid");
-            this.ticketingSystem.setInternetConnection(null);
-        }
-        scanner.close();
+    public void buildInternetConnection(String connectionType) {
+        InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
+        this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
+
     }
 
     @Override
@@ -212,24 +178,9 @@ class StandardBuilder implements Builder {
 
     }
 
-    @Override
-    public void buildWebServer() {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose your web server framework : ");
-        System.out.println("a.Django \n b.NodeJS \n c.Ruby\n");
-        String framework = scanner.next();
-        if (framework.equalsIgnoreCase("Django")) {
-            this.ticketingSystem.setWebServer(new DjangoWebServerFactory().createWebServer());
-        } else if (framework.equalsIgnoreCase("NodeJS")) {
-            this.ticketingSystem.setWebServer(new NodeJSWebServerFactory().createWebServer());
-        } else if (framework.equalsIgnoreCase("Ruby")) {
-            this.ticketingSystem.setWebServer(new NodeJSWebServerFactory().createWebServer());
-        } else {
-            System.err.println("Invalid");
-            this.ticketingSystem.setWebServer(null);
-        }
-        scanner.close();
+    public void buildWebServer(String serverType) {
+        WebServerFactory webServerFactory=new WebServerFactory();
+        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));;
     }
 
     public TicketingSystem getFinalProduct() {
@@ -264,19 +215,10 @@ class AdvancedBuilder implements Builder {
     }
 
     @Override
-    public void buildInternetConnection() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("a.GSM \n b.WIFI\n");
-        String internetConnection = scanner.next();
-        if (internetConnection.equalsIgnoreCase("GSM")) {
-            this.ticketingSystem.setInternetConnection(new GSMConnectionFactory().createConnection());
-        } else if (internetConnection.equalsIgnoreCase("WIFI")) {
-            this.ticketingSystem.setInternetConnection(new WiFiConnectionFactory().createConnection());
-        } else {
-            System.out.println("Invalid");
-            this.ticketingSystem.setInternetConnection(null);
-        }
-        scanner.close();
+    public void buildInternetConnection(String connectionType) {
+        InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
+        this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
+
     }
 
     @Override
@@ -289,24 +231,9 @@ class AdvancedBuilder implements Builder {
         this.ticketingSystem.setController("Separate Controller Unit has been set up");
     }
 
-    @Override
-    public void buildWebServer() {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose your web server framework : ");
-        System.out.println("a.Django \n b.NodeJS \n c.Ruby\n");
-        String framework = scanner.next();
-        if (framework.equalsIgnoreCase("Django")) {
-            this.ticketingSystem.setWebServer(new DjangoWebServerFactory().createWebServer());
-        } else if (framework.equalsIgnoreCase("NodeJS")) {
-            this.ticketingSystem.setWebServer(new NodeJSWebServerFactory().createWebServer());
-        } else if (framework.equalsIgnoreCase("Ruby")) {
-            this.ticketingSystem.setWebServer(new NodeJSWebServerFactory().createWebServer());
-        } else {
-            System.err.println("Invalid");
-            this.ticketingSystem.setWebServer(null);
-        }
-        scanner.close();
+    public void buildWebServer(String serverType) {
+        WebServerFactory webServerFactory=new WebServerFactory();
+        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));;
     }
 
     public TicketingSystem getFinalProduct() {
@@ -340,19 +267,10 @@ class PremiumBuilder implements Builder {
     }
 
     @Override
-    public void buildInternetConnection() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("a.GSM \n b.WIFI\n");
-        String internetConnection = scanner.next();
-        if (internetConnection.equalsIgnoreCase("GSM")) {
-            this.ticketingSystem.setInternetConnection(new GSMConnectionFactory().createConnection());
-        } else if (internetConnection.equalsIgnoreCase("WIFI")) {
-            this.ticketingSystem.setInternetConnection(new WiFiConnectionFactory().createConnection());
-        } else {
-            System.out.println("Invalid");
-            this.ticketingSystem.setInternetConnection(null);
-        }
-        scanner.close();
+    public void buildInternetConnection(String connectionType) {
+        InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
+        this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
+
     }
 
     @Override
@@ -365,26 +283,10 @@ class PremiumBuilder implements Builder {
         this.ticketingSystem.setController("Touch screen is already setup as a controller");
     }
 
-    @Override
-    public void buildWebServer() {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose your web server framework : ");
-        System.out.println("a.Django \n b.NodeJS \n c.Ruby\n");
-        String framework = scanner.next();
-        if (framework.equalsIgnoreCase("Django")) {
-            this.ticketingSystem.setWebServer(new DjangoWebServerFactory().createWebServer());
-        } else if (framework.equalsIgnoreCase("NodeJS")) {
-            this.ticketingSystem.setWebServer(new NodeJSWebServerFactory().createWebServer());
-        } else if (framework.equalsIgnoreCase("Ruby")) {
-            this.ticketingSystem.setWebServer(new NodeJSWebServerFactory().createWebServer());
-        } else {
-            System.err.println("Invalid");
-            this.ticketingSystem.setWebServer(null);
-        }
-        scanner.close();
+    public void buildWebServer(String serverType) {
+        WebServerFactory webServerFactory=new WebServerFactory();
+        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));;
     }
-
     public TicketingSystem getFinalProduct() {
         return this.ticketingSystem;
     }
@@ -397,13 +299,13 @@ class Director {
         this.builder = builder;
     }
 
-    public void build() {
+    public void build(String connectionType,String serverType) {
         builder.buildDisplayUnit();
         builder.buildIdentification();
         builder.buildPaymentTerminal();
-        builder.buildInternetConnection();
+        builder.buildInternetConnection(connectionType);
         builder.buildStorage();
         builder.buildController();
-        builder.buildWebServer();
+        builder.buildWebServer(serverType);
     }
 }
