@@ -82,6 +82,7 @@ interface Builder {
     void buildStorage();
 
     void buildWebServer(String serverType);
+    TicketingSystem getFinalProduct();
 
 }
 
