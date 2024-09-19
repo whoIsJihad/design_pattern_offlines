@@ -342,7 +342,7 @@ class Director {
         this.builder = builder;
     }
 
-    public void build(String connectionType,String serverType) {
+    public void build() {
         builder.buildDisplayUnit();
         builder.buildIdentification();
         builder.buildPaymentTerminal();

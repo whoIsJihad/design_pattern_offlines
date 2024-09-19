@@ -46,22 +46,22 @@ public class client{
                 builder=null;
         }
 
-        System.out.println("********************************");
-        //getting the connection type and also server type for the classes
-        String connectionType,serverType;
-        System.out.println("Enter the connection type: ");
-        //two connection type wifi and gsm
-        System.out.println("you can choose between a.wifi and b.gsm ");
-        connectionType=sc.next();
+        // System.out.println("********************************");
+        // //getting the connection type and also server type for the classes
+        // String connectionType,serverType;
+        // System.out.println("Enter the connection type: ");
+        // //two connection type wifi and gsm
+        // System.out.println("you can choose between a.wifi and b.gsm ");
+        // connectionType=sc.next();
 
-        //three type of server
-        System.out.println("you can choose between a.Django b.NodeJS c.Ruby");
+        // //three type of server
+        // System.out.println("you can choose between a.Django b.NodeJS c.Ruby");
 
-        System.out.println("Enter the server type: ");
-        serverType=sc.next();
+        // System.out.println("Enter the server type: ");
+        // serverType=sc.next();
 
         Director director=new Director(builder);
-        director.build(connectionType,serverType);
+        director.build();
         builder.getFinalProduct().showDetails();
 
     }
