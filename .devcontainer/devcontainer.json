@@ -1,0 +1,22 @@
+{
+  "name": "Java Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/java:11",
+  "settings": {
+    "java.home": "/usr/local/openjdk-11"
+  },
+  "extensions": [
+    "vscjava.vscode-java-pack",
+    "redhat.java",
+    "vscjava.vscode-java-test"
+  ],
+  "postCreateCommand": "mvn clean install",
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Java App",
+      "onAutoForward": "notify"
+    }
+  },
+  "remoteUser": "vscode"
+}
+

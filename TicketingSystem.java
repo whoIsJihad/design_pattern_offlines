@@ -66,6 +66,10 @@ class DisplayUnit {
     public void setDisplay(String display) {
         this.display = display;
     }
+    //overrride the toString method
+    public String toString() {
+        return "Microcontroller: " + microController + ", Display: " + display;
+    }
 }
 
 interface Builder {
@@ -75,13 +79,13 @@ interface Builder {
 
     void buildPaymentTerminal();
 
-    void buildInternetConnection(String connectionType);
+    void buildInternetConnection();
 
     void buildController();
 
     void buildStorage();
 
-    void buildWebServer(String serverType);
+    void buildWebServer();
     TicketingSystem getFinalProduct();
 
 }
@@ -111,9 +115,14 @@ class BasicBuilder implements Builder {
         this.ticketingSystem.setPaymentTerminal("Payment terminal has been set up for ticketing system(basic)");
     }
 
-    public void buildInternetConnection(String connectionType) {
+    public void buildInternetConnection() {
+        //take the connection type from user
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the connection type: a.WiFi b.GSM ");
+        String connectionType = scanner.next();
         InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
         this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
+        scanner.close();
     }
 
     public void buildStorage() {
@@ -124,9 +133,15 @@ class BasicBuilder implements Builder {
         this.ticketingSystem.setController("Separate Controller Unit has been set up");
     }
 
-    public void buildWebServer(String serverType) {
+    public void buildWebServer() {
+        //user will choose his server type here 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
+        String serverType = scanner.next();
+
         WebServerFactory webServerFactory=new WebServerFactory();
-        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));;
+        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
+        scanner.close();
     }
 
     public TicketingSystem getFinalProduct() {
@@ -162,10 +177,13 @@ class StandardBuilder implements Builder {
     }
 
     @Override
-    public void buildInternetConnection(String connectionType) {
+    public void buildInternetConnection() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the connection type: a.WiFi b.GSM ");
+        String connectionType = scanner.next();
         InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
         this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
-
+        scanner.close();
     }
 
     @Override
@@ -179,9 +197,15 @@ class StandardBuilder implements Builder {
 
     }
 
-    public void buildWebServer(String serverType) {
+    public void buildWebServer() {
+        //user will choose his server type here 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
+        String serverType = scanner.next();
+
         WebServerFactory webServerFactory=new WebServerFactory();
-        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));;
+        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
+        scanner.close();
     }
 
     public TicketingSystem getFinalProduct() {
@@ -216,10 +240,13 @@ class AdvancedBuilder implements Builder {
     }
 
     @Override
-    public void buildInternetConnection(String connectionType) {
+    public void buildInternetConnection() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the connection type: a.WiFi b.GSM c.Ethernet");
+        String connectionType = scanner.next();
         InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
         this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
-
+        scanner.close();
     }
 
     @Override
@@ -232,9 +259,15 @@ class AdvancedBuilder implements Builder {
         this.ticketingSystem.setController("Separate Controller Unit has been set up");
     }
 
-    public void buildWebServer(String serverType) {
+    public void buildWebServer() {
+        //user will choose his server type here 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
+        String serverType = scanner.next();
+
         WebServerFactory webServerFactory=new WebServerFactory();
-        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));;
+        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
+        scanner.close();
     }
 
     public TicketingSystem getFinalProduct() {
@@ -268,10 +301,13 @@ class PremiumBuilder implements Builder {
     }
 
     @Override
-    public void buildInternetConnection(String connectionType) {
+    public void buildInternetConnection() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the connection type: a.WiFi b.GSM c.Ethernet");
+        String connectionType = scanner.next();
         InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
         this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
-
+        scanner.close();
     }
 
     @Override
@@ -284,9 +320,15 @@ class PremiumBuilder implements Builder {
         this.ticketingSystem.setController("Touch screen is already setup as a controller");
     }
 
-    public void buildWebServer(String serverType) {
-        WebServerFactory webServerFactory=new WebServerFactory();
-        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));;
+    public void buildWebServer() {
+         //user will choose his server type here 
+         Scanner scanner = new Scanner(System.in);
+         System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
+         String serverType = scanner.next();
+ 
+         WebServerFactory webServerFactory=new WebServerFactory();
+         this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
+         scanner.close();
     }
     public TicketingSystem getFinalProduct() {
         return this.ticketingSystem;
@@ -304,9 +346,9 @@ class Director {
         builder.buildDisplayUnit();
         builder.buildIdentification();
         builder.buildPaymentTerminal();
-        builder.buildInternetConnection(connectionType);
+        builder.buildInternetConnection();
         builder.buildStorage();
         builder.buildController();
-        builder.buildWebServer(serverType);
+        builder.buildWebServer();
     }
 }

@@ -51,7 +51,7 @@ public class client{
         String connectionType,serverType;
         System.out.println("Enter the connection type: ");
         //two connection type wifi and gsm
-        System.out.println("you can choose between a.wifi and b.gsm");
+        System.out.println("you can choose between a.wifi and b.gsm ");
         connectionType=sc.next();
 
         //three type of server

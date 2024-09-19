@@ -18,9 +18,16 @@ class WiFiConnection implements InternetConnection {
 
 class GSMConnection implements InternetConnection {
     public void connect() {
-        System.out.println("GSM  connection has been built for the system");
+        System.out.println("GSM connection has been built for the system");
     }
 }
+
+class EthernetConnection implements InternetConnection {
+    public void connect() {
+        System.out.println("Ethernet connection has been built for the system");
+    }
+}
+
 
 class DjangoWebServer implements WebServer {
     public void configure() {
@@ -48,8 +55,11 @@ class InternetConnectionFactory {
             return new WiFiConnection();
         } else if (connectionType.equalsIgnoreCase("GSM")) {
             return new GSMConnection();
-        } else
-            return null;
+        } else if (connectionType.equalsIgnoreCase("Ethernet")) {
+            return new EthernetConnection();
+        }
+        return null;
+        
     }
 }
 
