@@ -66,7 +66,8 @@ class DisplayUnit {
     public void setDisplay(String display) {
         this.display = display;
     }
-    //overrride the toString method
+
+    // overrride the toString method
     public String toString() {
         return "Microcontroller: " + microController + ", Display: " + display;
     }
@@ -86,15 +87,18 @@ interface Builder {
     void buildStorage();
 
     void buildWebServer();
+
     TicketingSystem getFinalProduct();
 
 }
 
 class BasicBuilder implements Builder {
     private TicketingSystem ticketingSystem;
+    Scanner scanner;
 
     public BasicBuilder() {
         ticketingSystem = new TicketingSystem();
+        scanner = new Scanner(System.in);
     }
 
     @Override
@@ -116,13 +120,11 @@ class BasicBuilder implements Builder {
     }
 
     public void buildInternetConnection() {
-        //take the connection type from user
-        Scanner scanner = new Scanner(System.in);
+        // take the connection type from user
         System.out.println("Enter the connection type: a.WiFi b.GSM ");
-        String connectionType = scanner.next();
-        InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
+        String connectionType = scanner.nextLine();
+        InternetConnectionFactory internetConnectionFactory = new InternetConnectionFactory();
         this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
-        scanner.close();
     }
 
     public void buildStorage() {
@@ -134,14 +136,17 @@ class BasicBuilder implements Builder {
     }
 
     public void buildWebServer() {
-        //user will choose his server type here 
-        Scanner scanner = new Scanner(System.in);
+        // user will choose his server type here
         System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
-        String serverType = scanner.next();
+        String serverType = scanner.nextLine();
+        System.err.println(serverType);
+        try {
 
-        WebServerFactory webServerFactory=new WebServerFactory();
-        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
-        scanner.close();
+            WebServerFactory webServerFactory = new WebServerFactory();
+            this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
+        } catch (Exception e) {
+            System.out.println("Exception occured");
+        }
     }
 
     public TicketingSystem getFinalProduct() {
@@ -152,9 +157,11 @@ class BasicBuilder implements Builder {
 
 class StandardBuilder implements Builder {
     private TicketingSystem ticketingSystem;
+    Scanner scanner;
 
     public StandardBuilder() {
         ticketingSystem = new TicketingSystem();
+        scanner = new Scanner(System.in);
     }
 
     @Override
@@ -178,12 +185,11 @@ class StandardBuilder implements Builder {
 
     @Override
     public void buildInternetConnection() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the connection type: a.WiFi b.GSM ");
-        String connectionType = scanner.next();
-        InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
+        String connectionType = scanner.nextLine();
+        InternetConnectionFactory internetConnectionFactory = new InternetConnectionFactory();
         this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
-        scanner.close();
+        ;
     }
 
     @Override
@@ -198,14 +204,13 @@ class StandardBuilder implements Builder {
     }
 
     public void buildWebServer() {
-        //user will choose his server type here 
-        Scanner scanner = new Scanner(System.in);
+        // user will choose his server type here
         System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
-        String serverType = scanner.next();
+        String serverType = scanner.nextLine();
 
-        WebServerFactory webServerFactory=new WebServerFactory();
+        WebServerFactory webServerFactory = new WebServerFactory();
         this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
-        scanner.close();
+        ;
     }
 
     public TicketingSystem getFinalProduct() {
@@ -215,9 +220,11 @@ class StandardBuilder implements Builder {
 
 class AdvancedBuilder implements Builder {
     private TicketingSystem ticketingSystem;
+    Scanner scanner;
 
     public AdvancedBuilder() {
         ticketingSystem = new TicketingSystem();
+        scanner = new Scanner(System.in);
     }
 
     @Override
@@ -241,12 +248,11 @@ class AdvancedBuilder implements Builder {
 
     @Override
     public void buildInternetConnection() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the connection type: a.WiFi b.GSM c.Ethernet");
-        String connectionType = scanner.next();
-        InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
+        String connectionType = scanner.nextLine();
+        InternetConnectionFactory internetConnectionFactory = new InternetConnectionFactory();
         this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
-        scanner.close();
+        ;
     }
 
     @Override
@@ -260,14 +266,12 @@ class AdvancedBuilder implements Builder {
     }
 
     public void buildWebServer() {
-        //user will choose his server type here 
-        Scanner scanner = new Scanner(System.in);
+        // user will choose his server type here
         System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
-        String serverType = scanner.next();
+        String serverType = scanner.nextLine();
 
-        WebServerFactory webServerFactory=new WebServerFactory();
+        WebServerFactory webServerFactory = new WebServerFactory();
         this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
-        scanner.close();
     }
 
     public TicketingSystem getFinalProduct() {
@@ -277,8 +281,10 @@ class AdvancedBuilder implements Builder {
 
 class PremiumBuilder implements Builder {
     private TicketingSystem ticketingSystem;
+    Scanner scanner;
 
     public PremiumBuilder() {
+        scanner = new Scanner(System.in);
         ticketingSystem = new TicketingSystem();
     }
 
@@ -302,12 +308,10 @@ class PremiumBuilder implements Builder {
 
     @Override
     public void buildInternetConnection() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the connection type: a.WiFi b.GSM c.Ethernet");
-        String connectionType = scanner.next();
-        InternetConnectionFactory internetConnectionFactory=new InternetConnectionFactory();
+        String connectionType = scanner.nextLine();
+        InternetConnectionFactory internetConnectionFactory = new InternetConnectionFactory();
         this.ticketingSystem.setInternetConnection(internetConnectionFactory.createConnection(connectionType));
-        scanner.close();
     }
 
     @Override
@@ -321,15 +325,14 @@ class PremiumBuilder implements Builder {
     }
 
     public void buildWebServer() {
-         //user will choose his server type here 
-         Scanner scanner = new Scanner(System.in);
-         System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
-         String serverType = scanner.next();
- 
-         WebServerFactory webServerFactory=new WebServerFactory();
-         this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
-         scanner.close();
+        // user will choose his server type here
+        System.out.println("Enter the server type: a.Django b.NodeJS c.Ruby");
+        String serverType = scanner.nextLine();
+
+        WebServerFactory webServerFactory = new WebServerFactory();
+        this.ticketingSystem.setWebServer(webServerFactory.createWebServer(serverType));
     }
+
     public TicketingSystem getFinalProduct() {
         return this.ticketingSystem;
     }
